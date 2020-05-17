@@ -15,9 +15,9 @@ node {
 
     stage ('Deploy to kube cluster') {
         if ('develop' == scm.branches[0].name || 'master' == scm.branches[0].name) {
-            echo "aws eks update-kubeconfig --kubeconfig /tmp/kubeconfig --profile=dev"
-            echo "kubectl --kubeconfig=/tmp/kubeconfig apply -f service.yaml"
-            echo "export IMAGE_TAG=${env.BUILD_ID}; envsubst < deployment.yaml | kubectl --kubeconfig=/tmp/kubeconfig apply -f  -"
+            sh "aws eks update-kubeconfig --kubeconfig /tmp/kubeconfig --profile=dev"
+            sh "kubectl --kubeconfig=/tmp/kubeconfig apply -f service.yaml"
+            sh "export IMAGE_TAG=${env.BUILD_ID}; envsubst < ./deployment.yaml | kubectl --kubeconfig=/tmp/kubeconfig apply -f  -"
         }
     }
 
@@ -30,9 +30,9 @@ node {
 
     stage('promote') {
         if ('master' == scm.branches[0].name) {
-            echo "aws eks update-kubeconfig --kubeconfig /tmp/kubeconfig --profile=qa"
-            echo "kubectl --kubeconfig=/tmp/kubeconfig apply -f service.yaml"
-            echo "export IMAGE_TAG=${env.BUILD_ID}; envsubst < deployment.yaml | kubectl --kubeconfig=/tmp/kubeconfig apply -f  -"
+            sh "aws eks update-kubeconfig --kubeconfig /tmp/kubeconfig --profile=qa"
+            sh "kubectl --kubeconfig=/tmp/kubeconfig apply -f ./service.yaml"
+            sh "export IMAGE_TAG=${env.BUILD_ID}; envsubst < ./deployment.yaml | kubectl --kubeconfig=/tmp/kubeconfig apply -f  -"
         }
     }
 }
