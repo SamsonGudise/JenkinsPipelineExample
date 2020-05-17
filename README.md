@@ -1,9 +1,10 @@
 ## Jenkins  Multibranch Pipeline
 
 ### Pre-reqs
-1. Jenkins Master
-1. Elastic Kubernetes clusters
+1. Jenkins Master with `kubectl`,  `awscli` and update `$PATH` or update `Jenkfile` file
+1. Elastic Kubernetes Clusters
 1. AWS profile to access target account i.e, `dev` and `qa`
+
 
 
 ### Setup Jenkins Pipeline
@@ -65,3 +66,5 @@
 
 1. Merge change to `master` branch
     * At this point Multibranch Pipeline wil build image again with custom `index.html` push to regitry and deploy to EKS cluster in `qa`
+
+
