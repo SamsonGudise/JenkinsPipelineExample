@@ -24,7 +24,7 @@ node {
     stage ('Running test') {
         echo "${BRANCH_NAME}"
         if ("${BRANCH_NAME}" ==~ /PR-[0-9]+/) {
-            sh "test.sh"
+            sh "./test.sh"
         }
     }
 
