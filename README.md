@@ -53,7 +53,7 @@
 
 
 
-    *  Jenkins Multibranch Pipeline will build image with custom `index.html` push to defined registry and deploy to kubernetes in aws dev account.
+    Jenkins Multibranch Pipeline will build image with custom `index.html` push to defined registry and deploy to kubernetes in aws dev account. Run below `kubectl port-forward` command to check your changes.
 
         
         kubectl port-forward service/my-nginx 8080:80
